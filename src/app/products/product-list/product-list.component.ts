@@ -10,9 +10,30 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProductListComponent {
   title: string = 'Products';
-  products: Product[];
+  //products: Product[];
   products$: Observable<Product[]>;
   selectedProduct: Product;
+
+  // Pagination
+  pageSize = 5;
+  start = 0;
+  end = this.pageSize;
+  pageNumber = 1;
+
+  previousPage() {
+    this.start -= this.pageSize;
+    this.end -= this.pageSize;
+    this.pageNumber--;
+    this.selectedProduct = null;
+  }
+
+  nextPage() {
+    this.start += this.pageSize;
+    this.end += this.pageSize;
+    this.pageNumber++;
+    this.selectedProduct = null;
+  }
+
 
   onSelect(product: Product) {
     this.selectedProduct = product;
